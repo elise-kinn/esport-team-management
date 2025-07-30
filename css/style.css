@@ -1,0 +1,64 @@
+*{
+    margin : 0;
+    text-decoration: none;
+    list-style: none;
+    color : #110747;
+    transition: all 0.2s ease;
+}
+
+html{
+    background-color : #a4a7bb
+}
+
+h1{
+    text-align: center;
+    font-size: 55px;
+    margin : 25px 0
+}
+
+/* connexion */
+
+#options-inscription{
+    justify-content: center;
+    display: flex;
+    gap : 2px;
+    margin-top : 25px;
+
+    a{
+        text-decoration: underline;
+
+        &:hover{
+            color : #764141
+        }
+    }
+}
+
+#alert{
+    color : rgb(91, 0, 0);
+    text-align: center;
+    margin : 10px
+}
+
+#form-connexion{
+    margin : 0 auto;
+    width: fit-content;
+    display: flex;
+    gap : 25px
+}
+
+/* inscription */
+
+#form-inscription{
+    display: flex;
+    flex-direction: column;
+    gap : 15px;
+    width: fit-content;
+    margin : 0 auto;
+    justify-content: center;
+    align-items: end;
+    padding-right : 185px;
+
+    input[type='submit']{
+        margin-right : 36px;
+    }
+}
