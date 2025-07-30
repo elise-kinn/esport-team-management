@@ -107,11 +107,11 @@ if(isset($_POST['inscription'])){
             'password_hash' => $password_hash,
         ));
 
+        $_SESSION['user_email'] = $email; //stockage email dans la session
         header("Location: hub.php");
         exit;
     }
 }
 ?>
-
 </body>
 </html>
