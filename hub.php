@@ -17,7 +17,7 @@ if(!isset($_SESSION['user_email'])){
 
 </head>
 <body>
-    <a href="deconnexion.php">Déconnexion</a>
+    <a href="deconnexion.php" class="button">Déconnexion</a>
     <h1>HUB</h1>
     <p id="welcome">Bienvenue, <?=$_SESSION['user_name']?></p>
 </body>

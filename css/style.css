@@ -4,6 +4,7 @@
     list-style: none;
     color : #110747;
     transition: all 0.2s ease;
+    box-sizing: border-box;
 }
 
 html{
@@ -71,4 +72,34 @@ h1{
     text-align: center;
     font-weight: 100;
     font-size: 22px;
+}
+
+.button{
+    border: 1px solid ;
+    border-radius: 5px;
+    padding : 9px 30px;
+    margin : 25px;
+    display: block;
+    width: fit-content;
+
+    &:hover{
+        background-color: #281f5f;
+        color : #a0a0a0;
+    }
+}
+
+.red:hover{
+    background-color: #5f1f1f;
+    color : #cdcdcd;
+}
+
+#p-logout{
+    text-align: center;
+    margin-bottom : 25px
+}
+
+#div-button{
+    display: flex;
+    gap : 25px;
+    justify-content: center;
 }
