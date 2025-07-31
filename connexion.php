@@ -1,10 +1,12 @@
 <?php
 session_start();
 
-if(isset($_SESSION['user_email'])){
+if(isset($_SESSION['email'])){
     header('Location: hub.php');
     exit;
 }
+
+var_dump($_SESSION);
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +53,7 @@ if(isset($_POST['connexion'])){
     
     require_once('db.php');
 
-    $stmt = $pdo->prepare('SELECT id, password_hash, username FROM users WHERE email = :email');
+    $stmt = $pdo->prepare('SELECT password_hash FROM users WHERE email = :email');
 
     $stmt->execute(array(
         'email' => $email
@@ -61,9 +63,7 @@ if(isset($_POST['connexion'])){
 
     if($user !== false && password_verify($password, $user['password_hash'])){
         //stockage dans la session
-        $_SESSION['user_email'] = $email; 
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['user_name'] = $user['username'];
+        $_SESSION['email'] = $email; 
 
         header("Location: hub.php");
         exit;

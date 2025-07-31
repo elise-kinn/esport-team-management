@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(isset($_SESSION['user_email'])){
+if(isset($_SESSION['email'])){
     header('Location: hub.php');
     exit;
 }
@@ -116,7 +116,7 @@ if(isset($_POST['inscription'])){
             'password_hash' => $password_hash,
         ));
 
-        $_SESSION['user_email'] = $email; //stockage email dans la session
+        $_SESSION['email'] = $email; //stockage email dans la session
         header("Location: hub.php");
         exit;
     }

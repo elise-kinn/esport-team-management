@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 if(isset($_GET['deconnexion'])){
     session_start();
     session_unset();     // Supprime les variables de la session
@@ -6,6 +8,12 @@ if(isset($_GET['deconnexion'])){
 
     $message = "Vous avez bien été déconnecté·e";
 }
+
+if(isset($_SESSION['email'])){
+    header('Location: hub.php');
+    exit;
+}
+
 ?>
 
 <!DOCTYPE html>

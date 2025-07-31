@@ -17,7 +17,11 @@ h1{
     margin : 25px 0
 }
 
-
+h2{
+    text-align: center;
+    font-weight: 100;
+    margin-bottom : 25px
+}
 
 /* connexion */
 
@@ -102,4 +106,21 @@ h1{
     display: flex;
     gap : 25px;
     justify-content: center;
+}
+
+/* paramètres */
+
+#form-modifier{
+    display: flex;
+    flex-direction: column;
+    gap : 15px;
+    width: fit-content;
+    margin : 0 auto;
+    justify-content: center;
+    align-items: end;
+    padding-right : 80px;
+
+    input[type='submit']{
+        margin-right : -14px;
+    }
 }

@@ -1,9 +1,17 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['user_email'])){
+if(!isset($_SESSION['email'])){
     header('Location: connexion.php');
     exit;
+}else{
+    require_once('db.php');
+    $stmt = $pdo->prepare('SELECT username, role FROM users WHERE email = :email');
+    $stmt->execute(array(
+        'email' => $_SESSION['email']
+    ));
+
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 ?>
 
@@ -17,8 +25,12 @@ if(!isset($_SESSION['user_email'])){
 
 </head>
 <body>
-    <a href="deconnexion.php" class="button">Déconnexion</a>
+    <div id="div-button">
+        <a href="deconnexion.php" class="button">Déconnexion</a>
+        <a href="modifier_compte.php" class="button">Modifier mes informations</a>
+    </div>
+        
     <h1>HUB</h1>
-    <p id="welcome">Bienvenue, <?=$_SESSION['user_name']?></p>
+    <p id="welcome">Bienvenue, <?=$user['username']?></p>
 </body>
 </html>

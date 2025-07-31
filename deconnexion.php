@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['user_email'])){
+if(!isset($_SESSION['email'])){
     header('Location: connexion.php');
     exit;
 }
@@ -17,7 +17,7 @@ if(!isset($_SESSION['user_email'])){
 </head>
 <body>
     <h1>Déconnexion</h1>
-    <p id="p-logout">Êtes-vous sûr·e de vouloir vous déconnecter, <?=$_SESSION['user_name']?>?</p>
+    <p id="p-logout">Êtes-vous sûr·e de vouloir vous déconnecter, <?=$_SESSION['username']?>?</p>
 
     <div id="div-button">
         <a href="index.php?deconnexion=yes" class="button red">OUI, Se déconnecter</a>
