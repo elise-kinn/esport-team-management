@@ -64,7 +64,7 @@ if(!isset($_SESSION['email'])){
         foreach ($teams as $team) {
             $role = $team['role_in_team']; // mon rôle
 
-            if ($_POST['filtre'] == 0) {
+            if (!isset($_POST['filtre'])) {
                 // Toutes les équipes
             } else if ($_POST['filtre'] == 1 && !$role) {
                 continue; // Fitre les équipes dont je ne suis pas membre
