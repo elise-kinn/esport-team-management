@@ -32,5 +32,10 @@ if(!isset($_SESSION['email'])){
         
     <h1>HUB</h1>
     <p id="welcome">Bienvenue, <?=$user['username']?></p>
+
+    <div id="div-button">
+        <a href="equipes.php" class="button-hub">ÉQUIPES</a>
+        <a href="tournois.php"  class="button-hub">TOURNOIS</a>
+    </div>
 </body>
 </html>

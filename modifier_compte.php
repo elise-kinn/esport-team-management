@@ -6,7 +6,7 @@ if(!isset($_SESSION['email'])){
     exit;
 }else{
     require_once('db.php');
-    $stmt = $pdo->prepare('SELECT id, username, email, role FROM users WHERE email = :email');
+    $stmt = $pdo->prepare('SELECT id, username, email FROM users WHERE email = :email');
     $stmt->execute(array(
         'email' => $_SESSION['email']
     ));
@@ -25,7 +25,7 @@ if(!isset($_SESSION['email'])){
 
 </head>
 <body>
-        <a href="hub.php" class="button">Retour</a>
+    <a href="hub.php" class="button">Retour</a>
 
     <h1>Paramètres</h1>
     <h2>Mettre à jour vos informations</h2>
