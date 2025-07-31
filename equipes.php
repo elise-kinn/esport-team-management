@@ -28,77 +28,73 @@ if(!isset($_SESSION['email'])){
     <a href="hub.php" class="button">Retour</a>
     <h1>Équipes</h1>
 
+    <a href="creer_equipe.php" class="button create">Créer une nouvelle équipe</a>
+
     <div id="filter">
         <form method="POST">
             <label for='filtre'>Filtre : </label>
             <select name="filtre" id="filtre">
                 <option value="0">Toutes les équipes</option>                
-                <option value="1">MEs équipes</option>                
+                <option value="1">Mes équipes</option>                
                 <option value="2">Mes équipes CAPITAINE</option>
             </select>
 
             <input type="submit" value="Filtrer" name="filtrer">
         </form>
     </div>
+
     <div>
         <?php
         require_once('db.php');
-        // var_dump($_POST['filtre']);
 
-        if($_POST['filtre'] == 0){ // TOUTES 
-            $stmt_list = $pdo->prepare('SELECT name, created_at FROM teams');
+        $stmt_list = $pdo->prepare('
+            SELECT 
+                t.id,
+                t.name, 
+                t.created_at,
+                tm.role_in_team
+            FROM teams AS t
+            LEFT JOIN team_members AS tm ON tm.team_id = t.id AND tm.user_id = :id
+        ');
 
-            $stmt_list->execute();
-
-            echo('<p class="titre-list">Toutes les équipes</p>');
-
-        }else if($_POST['filtre'] == 1){ // MES EQUIPES
-            $stmt_list = $pdo->prepare('
-                SELECT name, created_at 
-                FROM teams AS t
-                LEFT JOIN team_members AS tm ON tm.team_id = t.id
-                WHERE tm.user_id = :id
-            ');
-
-            $stmt_list->execute(array(
-                'id' => $user['id']
-            ));
-
-            echo('<p class="titre-list">Toutes les équipes dont je suis membre</p>');
-
-        }else if($_POST['filtre'] == 2){ // MES EQUIPES CAPITAINE
-            $stmt_list = $pdo->prepare('
-                SELECT name, created_at 
-                FROM teams AS t
-                LEFT JOIN team_members AS tm ON tm.team_id = t.id
-                WHERE tm.user_id = :id AND role_in_team = :cap
-            ');
-
-            $stmt_list->execute(array(
-                'id' => $user['id'],
-                'cap' => 'capitaine'
-            ));
-
-            echo('<p class="titre-list">Toutes les équipes dont je suis capitaine</p>');
-
-        }
+        $stmt_list->execute(['id' => $user['id']]);
 
         $teams = $stmt_list->fetchAll();
 
-        foreach ($teams as $team) :
-        ?>
+        foreach ($teams as $team) {
+            $role = $team['role_in_team']; // mon rôle
 
-        <article class="list-team">
-            <h2><?=$team['name']?></h2>
-            <p>Date de création : <?=$team['created_at']?></p>
-            <div>
+            if ($_POST['filtre'] == 0) {
+                // Toutes les équipes
+            } else if ($_POST['filtre'] == 1 && !$role) {
+                continue; // Fitre les équipes dont je ne suis pas membre
+            } else if ($_POST['filtre'] == 2 && $role !== 'captain') {
+                continue; // Fitre les équipes dont je ne suis pas capitaine
+            }
 
+            // Affichage de l'article
+            echo "<article class='list-team'>";
+                echo'<div class="div-list">';
+                    echo "<h2>{$team['name']}</h2>";
+                    echo "<p>Créée le {$team['created_at']}</p>";
+                echo "</div>";
 
-            </div>
-        </article>
+                echo'<div class="div-list">';
 
-        <?php
-        endforeach
+                    if ($role === 'captain') {
+                        echo "<a href='gerer_team.php?id={$team['id']}'>Gérer l'équipe</a>";
+                        echo "<a href='inscrire_team.php?id={$team['id']}'>Inscrire l'équipe</a>";
+                    } elseif ($role) {
+                        echo "<a href='inscrire_team.php?id={$team['id']}'>Inscrire l'équipe</a>";
+                    } else {
+                        echo "<a href='rejoindre_team.php?id={$team['id']}'>Rejoindre l'équipe</a>";
+                    }
+                echo'</div>';
+
+            echo "</article>";
+
+        }
+
         ?>
     </div>
 

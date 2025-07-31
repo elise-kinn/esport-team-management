@@ -160,6 +160,13 @@ h2{
     p{
         font-size: 15px;
     }
+
+    .div-list{
+        display: flex;
+        flex-direction: column;
+        gap : 5px
+    }
+    
 }
 
 #filter{
@@ -167,8 +174,13 @@ h2{
     justify-content: center;
     gap : 25px
 }
-
+/* 
 .titre-list{
     text-align: center;
     margin-top : 25px
+} */
+
+.create{
+    margin-left : auto;
+    margin-right : auto;
 }
