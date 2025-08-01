@@ -31,7 +31,7 @@ if(!isset($_SESSION['email'])){
     <a href="creer_equipe.php" class="button create">Créer une nouvelle équipe</a>
 
     <div id="filter">
-        <form method="POST">
+        <form method="POST" action="equipes.php">
             <label for='filtre'>Filtre : </label>
             <select name="filtre" id="filtre">
                 <option value="0">Toutes les équipes</option>                
@@ -45,6 +45,23 @@ if(!isset($_SESSION['email'])){
 
     <div>
         <?php
+
+        $join = isset($_GET['join']) ? $_GET['join'] : '';
+
+        if($join == "yes"){ //Rejoindre une équipe
+            $stmt_join = $pdo->prepare('INSERT INTO team_members(user_id, team_id) VALUES (:user, :team)');
+            $stmt_join->execute(array(
+                'user' => $user['id'],
+                'team' => $_GET['id']
+            ));
+
+            if($stmt_join->rowCount() > 1){
+                echo"<p id='alert'>Une erreur s'est produite :( Veuillez réessayer.</p>";
+            }else{
+                echo"<p id='alert'>Vous avez rejoint votre équipe avec succès !</p>";
+            }
+
+        }
 
         $filtre = isset($_POST['filtre']) ? $_POST['filtre'] : -1;
 
@@ -108,11 +125,8 @@ if(!isset($_SESSION['email'])){
                         echo "<a href='rejoindre_team.php?id={$team['id']}'>Rejoindre l'équipe</a>";
                     }
                 echo'</div>';
-
             echo "</article>";
-
         }
-
         ?>
     </div>
 

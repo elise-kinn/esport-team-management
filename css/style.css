@@ -192,3 +192,40 @@ h2{
     gap : 10px;
     width : fit-content
 }
+
+/* rejoindre équipe */
+
+#team{
+    margin-top :25px;
+
+    p{
+        text-align: center;
+    }
+
+    h2{
+        margin : 0;
+        font-weight: 700;
+    }
+
+    >div{
+        display: flex;
+        flex-direction: column;
+        gap : 25px;
+        margin: auto;
+        width: fit-content;
+        margin-top : 25px;
+
+        border : 1px solid;
+        padding : 15px;
+        border-radius : 5px;
+
+        >div{
+            display: flex;
+            gap: 120px;
+            align-items: center;
+            justify-content: space-between;
+
+        }
+    }
+
+}

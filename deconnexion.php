@@ -4,6 +4,14 @@ session_start();
 if(!isset($_SESSION['email'])){
     header('Location: connexion.php');
     exit;
+}else{
+    require_once('db.php');
+    $stmt = $pdo->prepare('SELECT username, role FROM users WHERE email = :email');
+    $stmt->execute(array(
+        'email' => $_SESSION['email']
+    ));
+
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 ?>
 
@@ -17,7 +25,7 @@ if(!isset($_SESSION['email'])){
 </head>
 <body>
     <h1>Déconnexion</h1>
-    <p id="p-logout">Êtes-vous sûr·e de vouloir vous déconnecter, <?=$_SESSION['username']?>?</p>
+    <p id="p-logout">Êtes-vous sûr·e de vouloir vous déconnecter, <?=$user['username']?>?</p>
 
     <div id="div-button">
         <a href="index.php?deconnexion=yes" class="button red">OUI, Se déconnecter</a>

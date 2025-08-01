@@ -1,12 +1,12 @@
 <?php
-session_start();
-
 if(isset($_GET['deconnexion'])){
     session_start();
     session_unset();     // Supprime les variables de la session
     session_destroy();   // Détruit la session
 
     $message = "Vous avez bien été déconnecté·e";
+}else{
+    session_start();
 }
 
 if(isset($_SESSION['email'])){
