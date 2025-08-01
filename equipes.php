@@ -120,7 +120,7 @@ if(!isset($_SESSION['email'])){
                     if ($role === 'captain') {
                         echo "<a href='gestion_equipe.php?id={$team['id']}'>Gérer l'équipe</a>";
                     } else if (!$role) {
-                        echo "<a href='rejoindre_equipe.php?id={$team['id']}'>Rejoindre l'équipe</a>";
+                        echo "<a href='rejoindre_team.php?id={$team['id']}'>Rejoindre l'équipe</a>";
                     }
                 echo'</div>';
 
