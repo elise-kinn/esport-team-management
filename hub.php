@@ -34,8 +34,24 @@ if(!isset($_SESSION['email'])){
     <p id="welcome">Bienvenue, <?=$user['username']?> (<?=$user['role']?>)</p>
 
     <div id="div-button">
-        <a href="equipes.php" class="button-hub">ÉQUIPES</a>
-        <a href="tournois.php"  class="button-hub">TOURNOIS</a>
+        <?php
+        switch($user['role']){
+            case 'admin':
+                echo"<a href='equipes.php' class='button-hub'>ÉQUIPES</a>";
+                echo"<a href='tournois.php'  class='button-hub'>TOURNOIS</a>";
+                echo"<a href='joueurs.php'  class='button-hub'>JOUEURS</a>";
+                break;
+            case 'organizer':
+                echo"<a href='equipes.php' class='button-hub'>ÉQUIPES</a>";
+                echo"<a href='tournois.php'  class='button-hub'>TOURNOIS</a>";
+                break;
+            default:
+                echo"<a href='equipes.php' class='button-hub'>ÉQUIPES</a>";
+                echo"<a href='tournois.php'  class='button-hub'>TOURNOIS</a>";
+                break;
+        }
+
+        ?>
     </div>
 </body>
 </html>
