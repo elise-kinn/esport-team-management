@@ -109,6 +109,7 @@ if(!isset($_SESSION['email'])){
 
             // Affichage de l'article
             echo "<article class='list-team'>";
+
                 echo'<div class="div-list">';
                     echo "<h3>{$team['name']}</h3>";
                     echo "<p>Date de création : {$team['created_at']}</p>";
@@ -117,14 +118,12 @@ if(!isset($_SESSION['email'])){
                 echo'<div class="div-list">';
 
                     if ($role === 'captain') {
-                        echo "<a href='gerer_team.php?id={$team['id']}'>Gérer l'équipe</a>";
-                        echo "<a href='inscrire_team.php?id={$team['id']}'>Inscrire l'équipe</a>";
-                    } else if ($role) {
-                        echo "<a href='inscrire_team.php?id={$team['id']}'>Inscrire l'équipe</a>";
-                    } else {
+                        echo "<a href='gerer_equipe.php?id={$team['id']}'>Gérer l'équipe</a>";
+                    } else if (!$role) {
                         echo "<a href='rejoindre_team.php?id={$team['id']}'>Rejoindre l'équipe</a>";
                     }
                 echo'</div>';
+                
             echo "</article>";
         }
         ?>

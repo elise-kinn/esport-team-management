@@ -145,13 +145,14 @@ h2{
 .list-team{
     display: flex;
     justify-content: center;
-    gap : 25px;
     align-items: center;
+    justify-content: space-between;
     margin : 15px auto;
     border : 1px solid;
     border-radius: 5px;
-    width: fit-content;
+    width: 500px;
     padding : 15px;
+
 
     h2{
         margin : 0
@@ -228,4 +229,32 @@ h2{
         }
     }
 
+}
+
+/* inscription tournoi */
+
+#team-details{
+    border : 1px solid;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    margin: auto;
+    margin-top : 20px;
+    padding : 25px;
+    gap : 5px;
+    margin-bottom: 25px;
+
+    h2{
+        margin : 0
+    }
+
+    *{
+        text-align: center;
+    }
+
+    >div{
+        display: flex;
+        justify-content: space-around;
+    }
 }

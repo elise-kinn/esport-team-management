@@ -103,14 +103,16 @@ if(!isset($_SESSION['email'])){
             }
 
             echo "<article class='list-team'>";
-            echo "<div>";
-            echo "<h3>{$tournoi['tournoi_nom']}</h3>";
-            echo "<p>{$tournoi['game']}</p>";
-            echo"</div>";
-            echo "<p>{$tournoi['description']}</p>";
-            echo "<p>Début de l'évènement : {$tournoi['start_date']}</p>";
+                echo "<div>";
+                    echo "<h3>{$tournoi['tournoi_nom']}</h3>";
+                    echo "<p>{$tournoi['game']}</p>";
+                echo"</div>";
+                echo"<div>";
+                    echo "<p>{$tournoi['description']}</p>";
+                    echo "<p>Date : {$tournoi['start_date']}</p>";
+                echo"</div>";
+            echo"<a href='rejoindre_tournoi.php?id={$tournoi['tournoi_id']}'>Rejoindre le tournoi</a>";
             echo "</article>";
-
         }
         ?>
     </div>
