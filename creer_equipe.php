@@ -20,7 +20,7 @@ if(!isset($_SESSION['email'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-SPORT GESTION : Inscription</title>
+    <title>E-SPORT GESTION : Créer une équipe</title>
 
     <link rel="stylesheet" href="css/style.css">
 </head>

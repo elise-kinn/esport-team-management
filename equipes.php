@@ -20,7 +20,7 @@ if(!isset($_SESSION['email'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-SPORT GESTION : Inscription</title>
+    <title>E-SPORT GESTION : Équipes</title>
 
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -45,8 +45,26 @@ if(!isset($_SESSION['email'])){
 
     <div>
         <?php
-        require_once('db.php');
 
+        $filtre = isset($_POST['filtre']) ? $_POST['filtre'] : -1;
+
+        switch($filtre){
+            case 0:
+                $titre = "Toutes les équipes";
+                break;
+            case 1:
+                $titre = "Toutes vos équipes en tant que membre";
+                break;
+            case 2:
+                $titre = "Toutes vos équipes en tant que capitaine";
+                break;
+            default:
+                $titre = "Toutes les équipes";
+                break;
+        }
+
+        echo "<h2>$titre</h2>"
+;
         $stmt_list = $pdo->prepare('
             SELECT 
                 t.id,
@@ -75,8 +93,8 @@ if(!isset($_SESSION['email'])){
             // Affichage de l'article
             echo "<article class='list-team'>";
                 echo'<div class="div-list">';
-                    echo "<h2>{$team['name']}</h2>";
-                    echo "<p>Créée le {$team['created_at']}</p>";
+                    echo "<h3>{$team['name']}</h3>";
+                    echo "<p>Date de création : {$team['created_at']}</p>";
                 echo "</div>";
 
                 echo'<div class="div-list">';
@@ -84,7 +102,7 @@ if(!isset($_SESSION['email'])){
                     if ($role === 'captain') {
                         echo "<a href='gerer_team.php?id={$team['id']}'>Gérer l'équipe</a>";
                         echo "<a href='inscrire_team.php?id={$team['id']}'>Inscrire l'équipe</a>";
-                    } elseif ($role) {
+                    } else if ($role) {
                         echo "<a href='inscrire_team.php?id={$team['id']}'>Inscrire l'équipe</a>";
                     } else {
                         echo "<a href='rejoindre_team.php?id={$team['id']}'>Rejoindre l'équipe</a>";

@@ -172,7 +172,8 @@ h2{
 #filter{
     display: flex;
     justify-content: center;
-    gap : 25px
+    gap : 25px;
+    margin-bottom : 40px;
 }
 /* 
 .titre-list{
