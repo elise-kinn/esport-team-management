@@ -258,3 +258,20 @@ h2{
         justify-content: space-around;
     }
 }
+
+/* gestion role */
+#gestion-role-form{
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    gap : 15px;
+    flex-direction: column;
+    margin : auto;
+    margin-top : 25px;
+
+    div{
+        display: flex;
+        justify-content: center;
+        gap : 65px;
+    }   
+}

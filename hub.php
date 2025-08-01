@@ -27,15 +27,15 @@ if(!isset($_SESSION['email'])){
 <body>
     <div id="div-button">
         <a href="deconnexion.php" class="button">Déconnexion</a>
-        <a href="modifier_compte.php" class="button">Modifier mes informations</a>
+        <a href="joueur/modifier_compte.php" class="button">Modifier mes informations</a>
     </div>
         
     <h1>HUB</h1>
-    <p id="welcome">Bienvenue, <?=$user['username']?></p>
+    <p id="welcome">Bienvenue, <?=$user['username']?> (<?=$user['role']?>)</p>
 
     <div id="div-button">
-        <a href="equipes.php" class="button-hub">ÉQUIPES</a>
-        <a href="tournois.php"  class="button-hub">TOURNOIS</a>
+        <a href="/joueur/equipes/equipes.php" class="button-hub">ÉQUIPES</a>
+        <a href="/joueur/tournois/tournois.php"  class="button-hub">TOURNOIS</a>
     </div>
 </body>
 </html>
