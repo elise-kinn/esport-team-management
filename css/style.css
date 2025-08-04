@@ -282,7 +282,7 @@ h2{
     margin: auto;
     flex-direction: column;
     gap : 25px;
-
+    margin-bottom : 25px;
     h2{
         margin : 0
     }
@@ -294,13 +294,12 @@ h2{
         justify-content: space-around;
         padding : 15px;
         align-items: center;
-
     }
 }
 
 /* supprimer joueur */
 
-#joueur{
+#equipe{
     border-radius: 5px;
     width: fit-content;
     margin: auto;

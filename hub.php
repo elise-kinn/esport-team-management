@@ -24,9 +24,9 @@ if(!isset($_SESSION['email'])){
     <link rel="stylesheet" href="css/style.css">
 
 </head>
-<body>
+<body> 
     <div id="div-button">
-        <a href="deconnexion.php" class="button">Déconnexion</a>
+        <a href="deconnexion.php" class="button red">Déconnexion</a>
         <a href="modifier_compte.php" class="button">Modifier mes informations</a>
     </div>
         

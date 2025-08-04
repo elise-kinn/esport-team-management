@@ -5,8 +5,6 @@ if(isset($_SESSION['email'])){
     header('Location: hub.php');
     exit;
 }
-
-var_dump($_SESSION);
 ?>
 
 <!DOCTYPE html>

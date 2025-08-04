@@ -28,6 +28,10 @@ if(!isset($_SESSION['email'])){
     <a href="hub.php" class="button">Retour</a>
     <h1>Équipes</h1>
 
+    <?php
+    if($user['role'] === 'player'):
+    ?>
+
     <a href="creer_equipe.php" class="button create">Créer une nouvelle équipe</a>
 
     <div id="filter">
@@ -42,9 +46,30 @@ if(!isset($_SESSION['email'])){
             <input type="submit" value="Filtrer" name="filtrer">
         </form>
     </div>
+    <?php
+    endif
+    ?>
 
     <div>
         <?php
+        if($user['role'] === 'admin'){
+            $delete = isset($_GET['delete']) ? $_GET['delete'] : '';
+
+            if($delete){
+                $id_delete = $_GET['id'];
+
+                $stmt_delete = $pdo->prepare('DELETE FROM teams WHERE id = :id');
+                $stmt_delete->execute(array(
+                    'id' => $id_delete
+                ));
+
+                echo"<p id='alert'>La suppression de l'équipe a été effectuée avec succès</p> !";
+            }
+
+        }
+
+
+        if($user['role'] === 'player'){
 
         $join = isset($_GET['join']) ? $_GET['join'] : '';
 
@@ -60,28 +85,28 @@ if(!isset($_SESSION['email'])){
             }else{
                 echo"<p id='alert'>Vous avez rejoint votre équipe avec succès !</p>";
             }
-
         }
 
-        $filtre = isset($_POST['filtre']) ? $_POST['filtre'] : -1;
-
-        switch($filtre){
-            case 0:
-                $titre = "Toutes les équipes";
-                break;
-            case 1:
-                $titre = "Toutes vos équipes en tant que membre";
-                break;
-            case 2:
-                $titre = "Toutes vos équipes en tant que capitaine";
-                break;
-            default:
-                $titre = "Toutes les équipes";
-                break;
+            $filtre = isset($_POST['filtre']) ? $_POST['filtre'] : -1;
+    
+            switch($filtre){
+                case 0:
+                    $titre = "Toutes les équipes";
+                    break;
+                case 1:
+                    $titre = "Toutes vos équipes en tant que membre";
+                    break;
+                case 2:
+                    $titre = "Toutes vos équipes en tant que capitaine";
+                    break;
+                default:
+                    $titre = "Toutes les équipes";
+                    break;
+            }
+    
+            echo "<h2>$titre</h2>";
         }
 
-        echo "<h2>$titre</h2>"
-;
         $stmt_list = $pdo->prepare('
             SELECT 
                 t.id,
@@ -97,14 +122,16 @@ if(!isset($_SESSION['email'])){
         $teams = $stmt_list->fetchAll();
 
         foreach ($teams as $team) {
-            $role = $team['role_in_team']; // mon rôle
-
-            if (!isset($_POST['filtre'])) {
-                // Toutes les équipes
-            } else if ($_POST['filtre'] == 1 && !$role) {
-                continue; // Fitre les équipes dont je ne suis pas membre
-            } else if ($_POST['filtre'] == 2 && $role !== 'captain') {
-                continue; // Fitre les équipes dont je ne suis pas capitaine
+            if($user['role'] === 'player'){
+                $role = $team['role_in_team']; // mon rôle
+    
+                if (!isset($_POST['filtre'])) {
+                    // Toutes les équipes
+                } else if ($_POST['filtre'] == 1 && !$role) {
+                    continue; // Fitre les équipes dont je ne suis pas membre
+                } else if ($_POST['filtre'] == 2 && $role !== 'captain') {
+                    continue; // Fitre les équipes dont je ne suis pas capitaine
+                }
             }
 
             // Affichage de l'article
@@ -117,11 +144,18 @@ if(!isset($_SESSION['email'])){
 
                 echo'<div class="div-list">';
 
+                if($user['role'] === 'player'){
+
                     if ($role === 'captain') {
                         echo "<a href='gestion_equipe.php?id={$team['id']}'>Gérer l'équipe</a>";
                     } else if (!$role) {
-                        echo "<a href='rejoindre_team.php?id={$team['id']}'>Rejoindre l'équipe</a>";
+                        echo "<a href='rejoindre_equipe.php?id={$team['id']}'>Rejoindre l'équipe</a>";
                     }
+                }else if($user['role'] === 'admin'){
+                    echo "<a href='supprimer_equipe.php?id={$team['id']}'>Supprimer l'équipe</a>";
+                }
+
+
                 echo'</div>';
 
             echo "</article>";

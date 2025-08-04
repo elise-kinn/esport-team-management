@@ -36,17 +36,18 @@ if(!isset($_SESSION['email'])){
     <h1>Liste des joueurs</h1>
 
     <?php
-        $delete = isset($_GET['delete']) ? $_GET['delete'] : "";
+        $update = isset($_GET['statut']) ? $_GET['statut'] : "";
 
-        if($delete){
-            $id_delete = $_GET['id'];
+        if($update){
+            $id_update = $_GET['id'];
 
-            $stmt_delete = $pdo->prepare('DELETE FROM users WHERE id = :id');
-            $stmt_delete->execute(array(
-                'id' => $id_delete
+            $stmt_update = $pdo->prepare('UPDATE users SET role = :statut WHERE id = :id');
+            $stmt_update->execute(array(
+                'id' => $id_update,
+                'statut' => $update
             ));
 
-            echo"<p id='alert'>La suppression du compte a été effectuée avec succès</p> !";
+            echo"<p id='alert'>La modification de statut a été effectuée avec succès</p> !";
         }
     ?>
 
@@ -62,9 +63,9 @@ if(!isset($_SESSION['email'])){
 
         <article>
             <h2><?=$joueur['username']?></h2>
-            <p><?=$joueur['role']?></p>
             <p><?=$joueur['email']?></p>
-            <a href="supprimer_joueur.php?id=<?=$joueur['id']?>">Supprimer</a>
+            <p><?=$joueur['role']?></p>
+            <a href="modifier_joueur.php?id=<?=$joueur['id']?>" style="color : #5f1f1f">Modifier</a>
         </article>
 
         <?php
